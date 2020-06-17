@@ -1,0 +1,155 @@
+<html>
+<head>
+<title>Hand Cricket</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+label{
+font-size:32px;
+color:White;
+}
+.button {
+  background-color: white
+  border: none;
+  width: 100px;
+  color: black;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+.buttonnext {
+  border-radius: 4px;
+  background-color: white;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  visibility:hidden;
+}
+
+.buttonnext span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  color: black;
+}
+
+.buttonnext span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.buttonnext:hover span {
+  padding-right: 25px;
+}
+
+.buttonnext:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
+<script>
+localStorage.ballsleft=6;
+function nextactivity(){
+if(Number(localStorage.activity)==1){
+	localStorage.activity = Number(localStorage.activity) + 1;
+	window.open("bowling.html","_self");
+}
+else{
+	window.open("result.html","_self");
+}
+
+}
+
+function fun(bat){
+	localStorage.ballsleft = Number(localStorage.ballsleft) - 1;
+
+	var random = Math.floor(Math.random() * (+6 - +1) + +1);
+	if(random==5)
+	random = 6;
+	
+	document.getElementById('sysbowl').innerHTML="System bowled "+random;
+	document.getElementById('ballsleft').innerHTML="Balls Left = "+Number(localStorage.ballsleft);
+	
+	if(random==bat){
+	
+	document.getElementById("run1").disabled = true;
+	document.getElementById("run2").disabled = true;
+	document.getElementById("run3").disabled = true;
+	document.getElementById("run4").disabled = true;
+	document.getElementById("run6").disabled = true;
+	
+	 document.getElementById('next').style.visibility="visible";
+	 document.getElementById('out').innerHTML="You Are Out";
+	document.getElementById('out').style.color = '#F3321B'
+	
+	}
+	else{
+	localStorage.myscore = Number(localStorage.myscore) + Number(bat);
+	//document.write(localStorage.myscore);
+	document.getElementById("myscore").innerHTML="Your score = "+localStorage.myscore;
+		if(Number(localStorage.ballsleft)==0 ){
+		document.getElementById("run1").disabled = true;
+		document.getElementById("run2").disabled = true;
+		document.getElementById("run3").disabled = true;
+		document.getElementById("run4").disabled = true;
+		document.getElementById("run6").disabled = true;
+	
+		document.getElementById('next').style.visibility="visible";
+		}
+	}
+	
+
+	
+}
+</script>
+</head>
+<body style="background-color:686B76;">
+<center>
+<h1 style="color:white;"> You are Bating</h1>
+<div>
+<center>
+<button class="button" onclick="fun(1)" id="run1"><b>1</b></button>
+<button class="button" onclick="fun(2)" id="run2"><b>2</b></button>
+<button class="button" onclick="fun(3)" id="run3"><b>3</b></button>
+</center>
+</div>
+<div>
+<center>
+<button class="button" onclick="fun(4)" id="run4"><b>4</b></button>
+<button class="button" onclick="fun(6)" id="run6"><b>6</b></button>
+</center>
+</div>
+<br>
+<br>
+<label id="myscore" style="font-weight:bold;">Your score = 0</label>
+<br>
+<br>
+<label id="sysbowl"></label>
+<br>
+<br>
+<label id="ballsleft" style="font-weight:bold;">Balls Left = 6</label>
+<br>
+<br>
+<label id="out"></label>
+<br>
+<br>
+<button class="buttonnext" id="next" onclick="nextactivity()" ><span><b>Next</b> </span></button>
+</center>
+
+</body>
+</html>

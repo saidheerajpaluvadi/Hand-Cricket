@@ -1,0 +1,138 @@
+<html>
+<head>
+<title>Hand Cricket</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+function res(clicked){
+localStorage.myscore =0;
+localStorage.sysscore =0;
+var lab = document.getElementById('reslabel');
+var cli = 1;
+if(clicked == "Heads")
+	cli = 1;
+else
+	cli = 2;
+var random = Math.floor(Math.random() * (+3 - +1) + +1);
+if(random==1)
+document.getElementById('outcome').innerHTML="It's Heads";
+else
+document.getElementById('outcome').innerHTML="It's Tails";
+ if(random == cli ){
+ lab.innerHTML = "You Won the Toss";
+ lab.value = "You Won the Toss";
+ }
+ else{
+ lab.innerHTML = "You Lost the Toss";
+ lab.value = "You Lost the Toss";
+ }
+ 
+ document.getElementById('next').style.visibility="visible";
+ document.getElementById("head").disabled = true;
+ document.getElementById("tail").disabled = true;
+ 
+	
+}
+function nextactivity(){
+
+if(document.getElementById('reslabel').value == "You Won the Toss")
+window.open("choose.html","_self");
+else
+window.open("bating.html","_self");
+localStorage.activity=1;
+}
+</script>
+<style>
+.button {
+  background-color: white
+  border: none;
+  color: black;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+label{
+font-size:32px;
+color:White;
+}
+.buttonnext {
+  border-radius: 4px;
+  background-color: white;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  visibility: hidden;
+}
+
+.buttonnext span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  color: black;
+}
+
+.buttonnext span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.buttonnext:hover span {
+  padding-right: 25px;
+}
+
+.buttonnext:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
+</head>
+<body style="background-color:686B76;" id="tossbody">
+<center>
+<br>
+<br>
+<br>
+<b>
+<font size="10" color="White">TOSS</font>
+</b>
+<br>
+<br>
+<br>
+<br>
+<div>
+<center>
+<button class="button" style='margin-right:64px' onclick="res('Heads')" id="head"><b>Heads</b></button>
+<button class="button" onclick="res('Tails')" id = "tail" ><b>Tails</b></button>
+</center>
+<br>
+<br>
+<br>
+<label id = "outcome" value=""></label>
+<br>
+<br>
+<br>
+<label id = "reslabel" value=""></label>
+</div>
+<br>
+<br>
+<br>
+
+<button class="buttonnext" id="next" onclick="nextactivity()" ><span><b>Next</b> </span></button>
+
+</center>
+</body>
+</html>
